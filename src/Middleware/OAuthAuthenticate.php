@@ -101,6 +101,6 @@ class OAuthAuthenticate
      */
     protected function isWeChatBrowser($request)
     {
-        return strpos($request->header('user_agent'), 'MicroMessenger') !== false;
+        return stripos($request->header('user_agent'), 'MicroMessenger') !== false;
     }
 }
