@@ -73,7 +73,13 @@ class OAuthAuthenticate
         // 解析 code
         $info = $this->wechat->oauth->user()->getOriginal();
         Log::info('[wechat_login] original info: ', (array)$info);
-        $wechatUser = $this->wechatUserRepository->firstOrCreate(array_only($info, 'openid'), $info);
+        $wechatUser = $this->wechatUserRepository
+        ->scopeQuery(function ($query) use ($info) {
+            return $query->where('openid', $info['openid']);
+        })->first();
+        if (!$wechatUser) {
+            $wechatUser = $this->createWechatUserHandler->create($info);
+        }
         event(new WechatUserAuthorized($wechatUser));
         session(['wechat.oauth_user' => $wechatUser]);
 
