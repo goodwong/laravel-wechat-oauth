@@ -5,7 +5,7 @@ namespace Goodwong\LaravelWechatOAuth\Middleware;
 use Log;
 use Closure;
 use Illuminate\Http\Request;
-use Goodwong\LaravelWechat\Handlers\CreateWechatUserHandler;
+use Goodwong\LaravelWechat\Handlers\WechatHandler;
 use Goodwong\LaravelWechat\Events\WechatUserAuthorized;
 use Goodwong\LaravelWechat\Repositories\WechatUserRepository;
 use EasyWeChat\Foundation\Application as EasyWechatApplication;
@@ -15,13 +15,13 @@ class OAuthAuthenticate
     /**
      * construct
      * 
-     * @param  CreateWechatUserHandler  $createWechatUserHandler
+     * @param  WechatHandler  $wechatHandler
      * @param  WechatUserRepository  $wechatUserRepository
      * @return void
      */
-    public function __construct(CreateWechatUserHandler $createWechatUserHandler, WechatUserRepository $wechatUserRepository)
+    public function __construct(WechatHandler $wechatHandler, WechatUserRepository $wechatUserRepository)
     {
-        $this->createWechatUserHandler = $createWechatUserHandler;
+        $this->wechatHandler = $wechatHandler;
         $this->wechatUserRepository = $wechatUserRepository;
 
         $config = [
@@ -78,7 +78,7 @@ class OAuthAuthenticate
             return $query->where('openid', $info['openid']);
         })->first();
         if (!$wechatUser) {
-            $wechatUser = $this->createWechatUserHandler->create($info);
+            $wechatUser = $this->wechatHandler->create($info);
         }
         event(new WechatUserAuthorized($wechatUser));
         session(['wechat.oauth_user' => $wechatUser]);
