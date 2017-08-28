@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Goodwong\LaravelWechat\Handlers\WechatHandler;
 use Goodwong\LaravelWechat\Events\WechatUserAuthorized;
 use Goodwong\LaravelWechat\Repositories\WechatUserRepository;
-use EasyWeChat\Foundation\Application as EasyWechatApplication;
 
 class OAuthAuthenticate
 {
@@ -23,12 +22,7 @@ class OAuthAuthenticate
     {
         $this->wechatHandler = $wechatHandler;
         $this->wechatUserRepository = $wechatUserRepository;
-
-        $config = [
-            'app_id' => config('wechat.app_id'),
-            'secret' => config('wechat.secret'),
-        ];
-        $this->wechat = new EasyWechatApplication($config);
+        $this->wechat = app()->wechat;
     }
 
     /**
