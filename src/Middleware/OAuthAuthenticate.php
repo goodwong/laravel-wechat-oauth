@@ -46,7 +46,7 @@ class OAuthAuthenticate
             return $next($request);
         }
 
-        $scopes = $scopes ?: config('wechat.oauth.scopes', 'snsapi_userinfo');
+        $scopes = $scopes ?: config('wechat.oauth.scopes', 'snsapi_base');
         if (is_string($scopes)) {
             $scopes = array_map('trim', explode(',', $scopes));
         }
