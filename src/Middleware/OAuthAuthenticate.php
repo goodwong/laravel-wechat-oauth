@@ -1,13 +1,13 @@
 <?php
 
-namespace Goodwong\LaravelWechatOAuth\Middleware;
+namespace Goodwong\WechatOAuth\Middleware;
 
 use Log;
 use Closure;
 use Illuminate\Http\Request;
-use Goodwong\LaravelWechat\Handlers\WechatHandler;
-use Goodwong\LaravelWechat\Events\WechatUserAuthorized;
-use Goodwong\LaravelWechat\Repositories\WechatUserRepository;
+use Goodwong\Wechat\Handlers\WechatHandler;
+use Goodwong\Wechat\Events\WechatUserAuthorized;
+use Goodwong\Wechat\Repositories\WechatUserRepository;
 
 class OAuthAuthenticate
 {

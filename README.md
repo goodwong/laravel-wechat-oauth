@@ -19,7 +19,7 @@
 
         // ...
 
-        'wechat_oauth' => \Goodwong\LaravelWechatOAuth\Middleware\OAuthAuthenticate::class,
+        'wechat_oauth' => \Goodwong\WechatOAuth\Middleware\OAuthAuthenticate::class,
     ];
     ```
 
@@ -28,7 +28,7 @@
     // user auth
     Route::group([
         'middleware' => [
-            \Goodwong\LaravelWechatOAuth\Middleware\OAuthAuthenticate::class,
+            \Goodwong\WechatOAuth\Middleware\OAuthAuthenticate::class,
         ],
     ], function () {
         // ...
@@ -57,7 +57,7 @@
 
         // ...
 
-        'wechat_oauth' => \Goodwong\LaravelWechatOAuth\Middleware\OAuthAuthenticate::class,
+        'wechat_oauth' => \Goodwong\WechatOAuth\Middleware\OAuthAuthenticate::class,
     ];
     ```
 
@@ -66,7 +66,7 @@
     // user auth
     Route::group([
         'middleware' => [
-            \Goodwong\LaravelWechatOAuth\Middleware\OAuthAuthenticate::class,
+            \Goodwong\WechatOAuth\Middleware\OAuthAuthenticate::class,
         ],
     ], function () {
         // ...
